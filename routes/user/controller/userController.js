@@ -4,9 +4,9 @@ const jwt = require("jsonwebtoken");
 const User = require("../model/User");
 
 async function signup(req, res, next) {
-  const { username, email, password, firstName, lastName } = req.body;
+  const { username, email, password, firstName, lastName } = req.body;//pull in variables from the request body
 
-  const { errorObj } = res.locals;
+  const { errorObj } = res.locals; //i dont remember this 
 
   if (Object.keys(errorObj).length > 0) {
     return res.status(500).json({ message: "failure", payload: errorObj });
@@ -16,7 +16,7 @@ async function signup(req, res, next) {
     let salt = await bcrypt.genSalt(12);
     let hashedPassword = await bcrypt.hash(password, salt);
 
-    const createdUser = new User({
+    const createdUser = new User({// putting the new user in the db
       firstName,
       lastName,
       email,

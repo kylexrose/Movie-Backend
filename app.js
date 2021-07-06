@@ -19,7 +19,7 @@ const limiter = rateLimit({
   max: 20,
   windowMs: 1 * 60 * 1000, //this is in millie second
   message:
-    "Too many requests from this IP, please try again or contact support",
+    "Too many requests from this IP, please try again or contact support", //throws an error if a path is tried more than 20x
 });
 
 app.use("/api", limiter);
@@ -28,10 +28,10 @@ app.use(express.json());
 //parsing form data/incoming data
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api/user", userRouter);
-app.use("/api/twilio", twilioRouter);
+app.use("/api/user", userRouter); //this connects to the user authentication
+app.use("/api/twilio", twilioRouter);// this connects to the phone feature
 
-app.all("*", function (req, res, next) {
+app.all("*", function (req, res, next) {//for any path not recognized
   next(
     new ErrorMessageHandlerClass(
       `Cannot find ${req.originalUrl} on this server! Check your URL`,

@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");//token decrypter
 
 async function checkJwtToken(req, res, next) {
   try {
@@ -15,7 +15,7 @@ async function checkJwtToken(req, res, next) {
       //console.log(decodedJwt.message);
       //console.log(decodedJwt.status);
     } else {
-      throw { message: "You Don't have permission! ", statusCode: 500 };
+      throw { message: "You Don't have permission! ", statusCode: 500 };//no valid token found
     }
   } catch (e) {
     return next(e);

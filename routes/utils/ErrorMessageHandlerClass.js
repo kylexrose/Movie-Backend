@@ -1,4 +1,4 @@
-class ErrorMessageHandlerClass extends Error {
+class ErrorMessageHandlerClass extends Error {//set error class
   constructor(message, statusCode) {
     super(message, statusCode);
 
